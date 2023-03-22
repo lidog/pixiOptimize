@@ -1,0 +1,2 @@
+# pixiOptimize
+pixijs optimize
