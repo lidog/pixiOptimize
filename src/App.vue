@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Pixi from "@/components/Pixi2.vue";
+import Pixi from "@/components/Pixi4.vue";
 export default {
   name: 'App',
   components: {
