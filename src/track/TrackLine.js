@@ -12,8 +12,6 @@ export default class TrackBgPlate {
         line.lineTo(80, 50);
         line.x = 32;
         line.y = 32;
-        line.eventMode = 'static'
-        this.instance = line;
         protoHandle(this, line);
         return line;
     }

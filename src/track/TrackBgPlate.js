@@ -1,18 +1,18 @@
 import { Graphics } from "pixi.js";
-import { protoHandle, BaseTrackClass } from './trackUtils';
-// import { APPARENT_STATUS } from '@/track/trackStyle';
-// const style = APPARENT_STATUS[1];
+import { protoHandle, BaseTrackClass, APPARENT_STATUS } from './trackUtils';
 
 // 实例化背景板
 export default class TrackBgPlate extends BaseTrackClass {
-    constructor() {
+    constructor(trackData) {
+        const { label: { size, style } } = APPARENT_STATUS[trackData.arrDep] || APPARENT_STATUS[1];
         super();
         const graphics = new Graphics();
-        graphics.beginFill(0xDE3249);
-        graphics.drawRect(50, 50, 100, 100);
+        graphics.beginFill(
+            style.fill.color,
+            0.3 || style.fill.alpha
+        );
+        graphics.drawRect(0, 0, size.w, size.h, size.r);
         graphics.endFill();
-        graphics.eventMode = 'static'
-        this.instance = graphics;
         protoHandle(this, graphics);
         return graphics;
     }

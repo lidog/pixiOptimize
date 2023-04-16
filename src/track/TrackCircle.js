@@ -11,8 +11,6 @@ export default class TrackBgPlate extends BaseTrackClass {
         circle.beginFill(0xDE3249, 1);
         circle.drawCircle(100, 250, 50);
         circle.endFill();
-        circle.eventMode = 'static'
-        this.instance = circle;
         protoHandle(this, circle);
         return circle;
     }
