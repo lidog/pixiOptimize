@@ -39,8 +39,8 @@ export class BaseTrackClass {
     setPosition(x, y) {
         this.instance.position.set(x, y);
     }
-    update(newTrackData) {
-        
+    setScale(x, y) {
+        this.instance.scale.set(x, y);
     }
 }
 
@@ -353,12 +353,12 @@ export const getSimpleLabelText = (trackData) => {
             x: labelSize.w / 2 - 30,
             y: -labelSize.h / 7,
         },
-        isForeignPilots: {
-            visible: true,
-            value: trackData.isForeignPilots ? "E" : "",
-            x: labelSize.w / 2 - 13,
-            y: labelSize.h / 4 - 5,
-        },
+        // isForeignPilots: {
+        //     visible: true,
+        //     value: trackData.isForeignPilots ? "E" : "",
+        //     x: labelSize.w / 2 - 13,
+        //     y: labelSize.h / 4 - 5,
+        // },
     }
     return mergeTextStyle(textConfig, defaultLabelTextConfig);
 };

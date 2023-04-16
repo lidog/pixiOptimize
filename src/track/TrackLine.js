@@ -1,21 +1,23 @@
 import { Graphics } from "pixi.js";
-import { protoHandle } from './trackUtils';
-// import { APPARENT_STATUS } from '@/track/trackStyle';
-// const style = APPARENT_STATUS[1];
+import { protoHandle, APPARENT_STATUS, BaseTrackClass } from './trackUtils';
 
 // 实例化背景板
-export default class TrackBgPlate {
-    constructor() {
+export default class TrackLine extends BaseTrackClass {
+    constructor(trackData) {
+        super();
+        const { line: lineConfig } = APPARENT_STATUS[trackData.arrDep || 1];
+        const { size, style: {
+            width,
+            color,
+            alpha,
+        } } = lineConfig;
         const line = new Graphics();
-        line.lineStyle(4, 0xFFFFFF, 1);
+        line.lineStyle(width, color, alpha);
         line.moveTo(0, 0);
         line.lineTo(80, 50);
         line.x = 32;
         line.y = 32;
         protoHandle(this, line);
         return line;
-    }
-    setAlpha(alpha) {
-        this.instance.alpha = alpha;
     }
 }
