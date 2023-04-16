@@ -1,8 +1,15 @@
 // 全局缓存
 export const renderedTrackMap = Object.create(null);
+// 全局数据缓存
+export const renderedTrackDataMap = Object.create(null);
 
 // 判断是否是新的track
 export const isNewTrack = trackNumber => !renderedTrackMap[trackNumber];
+
+// 判断是否数据有变化；
+export const isTrackDataUpdated = trackData => {
+    return JSON.stringify(trackData) === renderedTrackDataMap[trackData.trackNumber];
+}
 
 // import { Container } from "pixi.js";
 /**
@@ -31,6 +38,9 @@ export class BaseTrackClass {
     }
     setPosition(x, y) {
         this.instance.position.set(x, y);
+    }
+    update(newTrackData) {
+        
     }
 }
 
@@ -198,7 +208,7 @@ export const defaultLabelTextConfig = {
 // 合并style；
 const mergeTextStyle = (textConfig, defaultConfig) => {
     Object.keys(defaultConfig).forEach(key => {
-        if(textConfig[key]) {
+        if (textConfig[key]) {
             textConfig[key].style = defaultConfig[key].style;
         }
     })

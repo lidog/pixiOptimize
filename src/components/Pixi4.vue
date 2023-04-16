@@ -14,8 +14,9 @@ onMounted(async () => {
     globalThis.__PIXI_APP__ = app; 
     document.body.appendChild(app.view);
     let trackData = await fetch('/track.json').then(res => res.json());
-    const track  = renderTrack(trackData, app);
+    const track  = renderTrack(trackData);
     track.setPosition(100, 100);
+    app.stage.addChild(track);
 })
 
 </script>

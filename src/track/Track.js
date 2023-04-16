@@ -40,4 +40,7 @@ export default class Track extends BaseTrackClass {
         // 返回容器；
         return container;
     }
+    updateTrack(newTrackData) {
+        
+    }
 }
