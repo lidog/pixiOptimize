@@ -17,6 +17,7 @@ onMounted(async () => {
     let trackData = await fetch('/track.json').then(res => res.json());
     const track  = renderTrack(trackData);
     track.setPosition(100, 100);
+    
     app.stage.addChild(track);
 })
 

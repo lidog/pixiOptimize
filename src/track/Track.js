@@ -19,6 +19,7 @@ import TrackLine from "./TrackLine";
  * 每个部件都会拥有 BaseTrackClass 的所有方法；
 */
 export default class Track extends BaseTrackClass {
+    static instanceName = "track"
     constructor(trackData) {
         super();
         const container = new Container();
@@ -37,10 +38,11 @@ export default class Track extends BaseTrackClass {
         container.addChild(line);
         // 处理原型链；
         protoHandle(this, container);
+        // container.scale.set(1/0.25, -1/0.25);
         // 返回容器；
         return container;
     }
     updateTrack(newTrackData) {
-        
+        console.log(newTrackData, 123848);
     }
 }

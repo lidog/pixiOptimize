@@ -13,6 +13,7 @@ export default class TrackText extends BaseTrackClass {
             textContainer.addChild(text);
         })
         protoHandle(this, textContainer);
+        // textContainer.scale.set(0.8), 1;
         return textContainer;
     }
 }

@@ -1,7 +1,8 @@
 import { Container } from "pixi.js";
-import { protoHandle, BaseTrackClass, tagsTypeArr, APPARENT_STATUS } from './trackUtils';
+import { protoHandle, BaseTrackClass, getApparentStatus } from './trackUtils';
 import TrackText from "./TrackText";
 import TrackBgPlate from "./TrackBgPlate";
+import { tagsTypeArr } from './trackConst';
 
 export default class TrackLabel extends BaseTrackClass {
     constructor(trackData) {
@@ -18,13 +19,10 @@ export default class TrackLabel extends BaseTrackClass {
 
         protoHandle(this, trackLabel);
 
-        const { line: lineConfig } = APPARENT_STATUS[trackData.arrDep ?? 1];
-        const { size: {
-            length,
-            angle,
-        } } = lineConfig;
-        const lineAngle = angle;
-        const lineLength = length;
+        const {
+            length: lineLength,
+            angle: lineAngle,
+        } = getApparentStatus(trackData.arrDep, 'line.size')
         const labelSize = tagsTypeArr[0];
         let dd = 0;
         let criticalTheta = Math.atan2(labelSize.h / 2, labelSize.w / 2);

@@ -1,11 +1,11 @@
 import { Graphics, Sprite, SCALE_MODES } from "pixi.js";
-import { protoHandle, BaseTrackClass, APPARENT_STATUS, tagsTypeArr } from './trackUtils';
-
+import { protoHandle, BaseTrackClass, getApparentStatus } from './trackUtils';
+import { tagsTypeArr } from './trackConst';
 // 实例化背景板
 export default class TrackBgPlate extends BaseTrackClass {
     constructor(trackData) {
         super();
-        const { label: { size, style } } = APPARENT_STATUS[trackData.arrDep] || APPARENT_STATUS[1];
+        const { size, style } = getApparentStatus(trackData.arrDep, 'label');
         const labelSize = tagsTypeArr[0];
         const graphics = new Graphics();
         graphics.beginFill(
@@ -26,8 +26,8 @@ export default class TrackBgPlate extends BaseTrackClass {
             2
         );
         const rectSprite = new Sprite(graphicsTexture);
-        // rectSprite.height = labelSize.h;
-        // rectSprite.width = labelSize.w;
+        rectSprite.height = labelSize.h;
+        rectSprite.width = labelSize.w;
         // 标牌点击事件
         rectSprite.anchor.set(0.5); // !important
         rectSprite.position.set(0);

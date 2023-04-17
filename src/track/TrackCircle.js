@@ -1,23 +1,31 @@
-import { Graphics } from "pixi.js";
-import { protoHandle, BaseTrackClass, APPARENT_STATUS } from './trackUtils';
-// const style = APPARENT_STATUS[1];
+import { Graphics, SCALE_MODES, Sprite } from "pixi.js";
+import { protoHandle, BaseTrackClass, getApparentStatus } from './trackUtils';
 
 // 实例化背景板
 export default class TrackBgPlate extends BaseTrackClass {
     constructor(trackData) {
         super();
-        const { target: { style: { border, fill }, radius: {nor} } } = APPARENT_STATUS[trackData.arrDep] || APPARENT_STATUS[1];
+        const { style: { border, fill }, radius: { nor } } = getApparentStatus(trackData.arrDep, 'target');
         const circle = new Graphics();
         circle.lineStyle({
             width: border.width,
             color: border.color,
             alpha: trackData.isvirtually ? 0 : border.alpha,
-          });
+        });
         circle.beginFill(fill.color, fill.alpha);
-        circle.drawCircle(0,0, nor);
+        circle.drawCircle(0, 0, nor);
         circle.endFill();
-        protoHandle(this, circle);
-        this.setScale(0.5, 0.5);
-        return circle;
+        const circleTexture = window.app.renderer.generateTexture(
+            circle,
+            SCALE_MODES.NEAREST,
+            2
+        )
+        const circleSprite = new Sprite(circleTexture);
+        // let { xPoint = 0, yPoint = 0 } = trackData;
+        circleSprite.anchor.set(0.5);
+        circleSprite.position.set(0, 0);
+        circleSprite.scale.set(0.5);
+        protoHandle(this, circleSprite);
+        return circleSprite;
     }
 }

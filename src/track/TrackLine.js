@@ -1,21 +1,21 @@
-import { Sprite } from "pixi.js";
-import { Texture } from "pixi.js";
-import { Graphics } from "pixi.js";
-import { protoHandle, APPARENT_STATUS, BaseTrackClass } from './trackUtils';
+import { Sprite, Texture } from "pixi.js";
+import { protoHandle, BaseTrackClass, getApparentStatus } from './trackUtils';
 
 // 实例化背景板
 export default class TrackLine extends BaseTrackClass {
     constructor(trackData) {
         super();
-        const { line: lineConfig } = APPARENT_STATUS[trackData.arrDep ?? 1];
-        const { size: {
-            length,
-            angle,
-        }, style: {
-            width,
-            color,
-            alpha,
-        } } = lineConfig;
+        const {
+            size: {
+                length,
+                angle,
+            },
+            style: {
+                width,
+                color,
+                alpha,
+            }
+        } = getApparentStatus(trackData.arrDep, 'line');
         let line = new Sprite(Texture.WHITE);
         line.height = width;
         line.tint = color;
