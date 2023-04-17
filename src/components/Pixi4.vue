@@ -10,6 +10,7 @@ import renderTrack from '@/track';
 
 onMounted(async () => {
     let app = new PIXI.Application({ background: "#ccc" });
+    window.app = app;
     /* eslint-disable */
     globalThis.__PIXI_APP__ = app; 
     document.body.appendChild(app.view);

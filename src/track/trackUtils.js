@@ -88,7 +88,7 @@ export const APPARENT_STATUS = {
     1: {
         label: {
             style: {
-                fill: { color: 0x121110, alpha: 1 },
+                fill: { color: 0x121110, alpha: 0.1 },
                 text: { color: 0xffffff },
             },
             size: {
