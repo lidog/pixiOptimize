@@ -28,18 +28,19 @@ export default class Track extends BaseTrackClass {
         const trackLabel = new TrackLabel(trackData);
         container.label = trackLabel;
         container.addChild(trackLabel);
-        // circle
-        const circle = new TrackCircle(trackData);
-        container.labelCircle = circle;
-        container.addChild(circle);
         // line
         const line = new TrackLine(trackData);
         container.labelLine = line;
         container.addChild(line);
+        // circle
+        const circle = new TrackCircle(trackData);
+        container.labelCircle = circle;
+        container.addChild(circle);
         // 处理原型链；
         protoHandle(this, container);
         // container.scale.set(1/0.25, -1/0.25);
         // 返回容器；
+        container.name = 'track'
         return container;
     }
     updateTrack(newTrackData) {

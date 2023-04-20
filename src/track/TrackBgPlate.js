@@ -32,6 +32,7 @@ export default class TrackBgPlate extends BaseTrackClass {
         rectSprite.anchor.set(0.5); // !important
         rectSprite.position.set(0);
         protoHandle(this, graphics);
+        rectSprite.name = 'trackBgPlate'
         return rectSprite;
     }
 }

@@ -24,6 +24,7 @@ export default class TrackLine extends BaseTrackClass {
         line.width = length;
         line.position.set(0);
         protoHandle(this, line);
+        line.name = 'trackLine';
         return line;
     }
 }

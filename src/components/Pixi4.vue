@@ -12,7 +12,7 @@ onMounted(async () => {
     let app = new PIXI.Application({ background: "#ccc" });
     window.app = app;
     /* eslint-disable */
-    globalThis.__PIXI_APP__ = app; 
+    globalThis.__PIXI_APP__ = app;
     document.body.appendChild(app.view);
     let trackData = await fetch('/track.json').then(res => res.json());
     const track  = renderTrack(trackData);

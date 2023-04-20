@@ -5,15 +5,13 @@ export default class TrackText extends BaseTrackClass {
     constructor(trackData) {
         super();
         const textContainer = new Container();
-        textContainer.trackTexts = Object.create(null);
         const textConfig = getSimpleLabelText(trackData);
         Object.keys(textConfig).forEach(key => {
-            const text = new myText(trackData[key], textConfig[key]);
-            textContainer.trackTexts[key] = text;
+            const text = new myText(trackData[key], textConfig[key], key);
             textContainer.addChild(text);
         })
         protoHandle(this, textContainer);
-        // textContainer.scale.set(0.8), 1;
+        textContainer.name = 'trackTexts'
         return textContainer;
     }
 }
@@ -24,7 +22,7 @@ const defaultFontStyle = {
     fill: 0xffffff,
 };
 class myText extends BaseTrackClass {
-    constructor(textValue, config) {
+    constructor(textValue, config, key) {
         super();
         const trackText = new Text(textValue, {
             ...config.style || defaultFontStyle,
@@ -32,8 +30,9 @@ class myText extends BaseTrackClass {
             strokeThickness: 1,
         });
         trackText.position.set(config.x, config.y);
-        trackText.visible = config.visible;
+        trackText.visible = Boolean(config.visible);
         protoHandle(this, trackText);
+        trackText.name = key;
         return trackText;
     }
 }

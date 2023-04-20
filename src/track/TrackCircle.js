@@ -2,7 +2,7 @@ import { Graphics, SCALE_MODES, Sprite } from "pixi.js";
 import { protoHandle, BaseTrackClass, getApparentStatus } from './trackUtils';
 
 // 实例化背景板
-export default class TrackBgPlate extends BaseTrackClass {
+export default class TrackCircle extends BaseTrackClass {
     constructor(trackData) {
         super();
         const { style: { border, fill }, radius: { nor } } = getApparentStatus(trackData.arrDep, 'target');
@@ -21,11 +21,11 @@ export default class TrackBgPlate extends BaseTrackClass {
             2
         )
         const circleSprite = new Sprite(circleTexture);
-        // let { xPoint = 0, yPoint = 0 } = trackData;
         circleSprite.anchor.set(0.5);
         circleSprite.position.set(0, 0);
         circleSprite.scale.set(0.5);
         protoHandle(this, circleSprite);
+        circleSprite.name = 'trackCircle';
         return circleSprite;
     }
 }

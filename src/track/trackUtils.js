@@ -16,6 +16,7 @@ export const isTrackDataUpdated = trackData => {
 
 /**
  * 把 originTarget 原型上的方法，挂到 target 上；
+ * 把target 的子元素映射为属性；
  */
 export function protoHandle(originTarget, target) {
     target.eventMode = 'static'
@@ -32,6 +33,10 @@ export function protoHandle(originTarget, target) {
     keysOfProto.forEach(key => {
         target[key] = (...arg) => originTarget[key].apply(originTarget, arg);
     });
+    // 映射子元素
+    target.children?.forEach(children => {
+        target[children.name] = children;
+    })
 }
 
 /**

@@ -39,6 +39,7 @@ export default class TrackLabel extends BaseTrackClass {
             (lineLength + dd) * Math.sin(lineAngle)
         );
         trackLabel.pivot.set(0.5);
+        trackLabel.name = 'trackLabel';
         return trackLabel;
     }
 }
