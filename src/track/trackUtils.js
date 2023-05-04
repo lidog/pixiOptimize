@@ -1,4 +1,4 @@
-import lodash from "lodash";
+import { get } from "lodash";
 import { APPARENT_STATUS, defaultLabelTextConfig } from "./trackConst";
 import Vue from "vue";
 import { GlowFilter, OutlineFilter } from "pixi-filters";
@@ -31,7 +31,7 @@ export function protoHandle(originTarget, target) {
   keysOfProto.forEach((key) => {
     target[key] = (...arg) => originTarget[key].apply(originTarget, arg);
   });
-  ["setPosition", "setScale", "getParent", "getTrackData"].forEach((key) => {
+  Object.getOwnPropertyNames(BaseTrackClass.prototype).forEach((key) => {
     target[key] = (...arg) => originTarget[key].apply(originTarget, arg);
   });
   // 映射子元素
@@ -60,7 +60,7 @@ export class BaseTrackClass {
   }
   getParentByType(trackType) {
     let parent = this.dom.parent;
-    while (parent.trackType !== trackType) {
+    while (parent?.trackType !== trackType) {
       parent = parent.parent;
     }
     if (parent.trackType !== trackType) return null;
@@ -69,10 +69,29 @@ export class BaseTrackClass {
   getTrackData() {
     return this.dom?.trackData ?? this.getParentByType("track")?.trackData;
   }
+  contains(childrenName) {
+    let match = (parent) => {
+      let children = parent.children;
+      if(children?.length > 0) {
+        for(let i = 0; i < children.length; i++) {
+          if (children[i].name === childrenName) {
+            return true;
+          } else if (children.children?.length > 0) {
+            return match(children);
+          }
+        }
+      }
+      return false;
+    }
+    return match(this.dom);
+  }
+  belongTo(parentName) {
+      return Boolean(this.getParent(parentName));
+  }
 }
 
 export function getApparentStatus(index = 1, key = "") {
-  return lodash.get(APPARENT_STATUS[index], key);
+  return get(APPARENT_STATUS[index], key);
 }
 
 // 合并style；

@@ -40,7 +40,8 @@
     "rules": {
       "vue/multi-word-component-names": 0,
       "vue/no-unused-components": 0,
-      "no-unused-vars": 0
+      "no-unused-vars": 0,
+      "no-debugger": 0
     }
   },
   "browserslist": [
