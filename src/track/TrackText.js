@@ -10,9 +10,13 @@ export default class TrackText extends BaseTrackClass {
             const text = new myText(trackData[key], textConfig[key], key);
             textContainer.addChild(text);
         })
-        protoHandle(this, textContainer);
         textContainer.name = 'trackTexts'
+        textContainer.scale.set(-1, 1);
+        protoHandle(this, textContainer);
         return textContainer;
+    }
+    update(newTrackData) {
+        this.dom.children.forEach(children => children?.update?.(newTrackData));
     }
 }
 
@@ -22,17 +26,28 @@ const defaultFontStyle = {
     fill: 0xffffff,
 };
 class myText extends BaseTrackClass {
-    constructor(textValue, config, key) {
+    constructor(textValue, textConfig, key) {
         super();
+        this.textKey = key;
         const trackText = new Text(textValue, {
-            ...config.style || defaultFontStyle,
+            ...textConfig.style || defaultFontStyle,
             stroke: "#000000",
             strokeThickness: 1,
         });
-        trackText.position.set(config.x, config.y);
-        trackText.visible = Boolean(config.visible);
+        trackText.position.set(textConfig.x, textConfig.y);
+        trackText.visible = Boolean(textConfig.visible);
         protoHandle(this, trackText);
         trackText.name = key;
         return trackText;
+    }
+    update(newTrackData) {
+        this.dom.children.forEach(children => children?.update?.(newTrackData));
+        // 改变文字；
+        if (this.dom.text !== newTrackData[this.textKey]) {
+            this.dom.text = newTrackData[this.textKey];
+        }
+        // 重新定义style this.dom.style = { fill: xxx, font:xxx }
+        // 设置 透明度
+        this.dom.alpha = newTrackData.isTrackOwner ? 1 : 0.5;
     }
 }

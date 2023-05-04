@@ -9,6 +9,9 @@
   },
   "dependencies": {
     "core-js": "^3.8.3",
+    "pixi-dashed-line": "^1.4.2",
+    "pixi-filters": "^5.2.1",
+    "pixi-viewport": "4.38.0",
     "pixi.js": "^7.2.2",
     "vue": "^2.6.14"
   },

@@ -1,49 +1,59 @@
 import { Container } from "pixi.js";
-import { protoHandle, BaseTrackClass } from './trackUtils';
-import TrackLabel from "./TrackLabel";
+import { protoHandle, BaseTrackClass, renderedTrackMap, trackConfig } from './trackUtils';
 import TrackCircle from "./TrackCircle";
-import TrackLine from "./TrackLine";
+import TrackLabelAndLine from "./TrackLabelAndLine";
 
 /**
  * 把 track 部件组装起来，结构如下： 
- * track: [
- *   labelLine,
+ * track: {
  *   labelCircle,
- *   label: [
- *      labelRect,
- *      labelText: [
- *           trackCallSign, trackFlyType, trackRunway, trackStripState
- *      ]
- *   ]        
- * ]
- * 每个部件都会拥有 BaseTrackClass 的所有方法；
+ *   labelAndLine: {
+ *      labelLine
+ *      label: {
+ *          labelRect,
+ *          labelTexts: {
+ *              callSign, flyType, runway, stripState
+ *          }
+ *      }    
+ *   }       
+ * }
+ * 每个部件都会拥有 BaseTrackClass 的所有方法；以及自定义的update方法；
 */
 export default class Track extends BaseTrackClass {
-    static instanceName = "track"
     constructor(trackData) {
         super();
         const container = new Container();
         container.trackData = trackData;
-        // label
-        const trackLabel = new TrackLabel(trackData);
-        container.label = trackLabel;
-        container.addChild(trackLabel);
-        // line
-        const line = new TrackLine(trackData);
-        container.labelLine = line;
-        container.addChild(line);
+        // label and line
+        const trackLabelAndLine = new TrackLabelAndLine(trackData);
+        container.addChild(trackLabelAndLine);
+        container.trackLine = trackLabelAndLine.trackLine;
+        container.trackLabel = trackLabelAndLine.trackLabel;
         // circle
         const circle = new TrackCircle(trackData);
-        container.labelCircle = circle;
         container.addChild(circle);
         // 处理原型链；
         protoHandle(this, container);
-        // container.scale.set(1/0.25, -1/0.25);
         // 返回容器；
-        container.name = 'track'
+        container.name = `track_${trackData.TrackNumber}`;
+        container.trackType = 'track';
+        container.position.set(trackData.xPoint, trackData.yPoint);
+        container.angle = -180;
         return container;
     }
-    updateTrack(newTrackData) {
-        console.log(newTrackData, 123848);
+    update(newTrackData) {
+        // 更新子组件；
+        this.dom.children.forEach(children => children?.update?.(newTrackData));
+        // 自己的更新处理
+        const {xPoint, yPoint} = newTrackData;
+        this.setPosition(xPoint, yPoint);
+    }
+    updateAngle() {
+        this.dom.angle = -180;
+    }
+    // 销毁实例；
+    destroy() {
+        this.dom.parent.removeChild(this.dom);
+        delete renderedTrackMap[this.dom.trackData.TrackNumber];
     }
 }
