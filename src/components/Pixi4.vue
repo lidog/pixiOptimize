@@ -21,7 +21,6 @@ onMounted(async () => {
     app.stage.addChild(viewport);
     let trackData = await fetch('/track.json').then(res => res.json());
     const trackDom  = renderTrack(trackData, viewport);
-    console.log(trackDom);
 })
 
 </script>

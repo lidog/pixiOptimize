@@ -15,7 +15,7 @@ export default class TrackBgPlate extends BaseTrackClass {
     const labelSize = tagsTypeArr[0];
     const graphics = new Graphics();
     graphics.beginFill(style.fill.color, style.fill.alpha);
-    graphics.drawRoundedRect(0, 0, size.w, size.h, size.r);
+    graphics.drawRoundedRect(0, 0, labelSize.w, labelSize.h, size.r);
     graphics.endFill();
     const graphicsTexture = window.app.renderer.generateTexture(
       graphics,
@@ -23,14 +23,12 @@ export default class TrackBgPlate extends BaseTrackClass {
       2
     );
     const rectSprite = new Sprite(graphicsTexture);
-    rectSprite.height = labelSize.h;
-    rectSprite.width = labelSize.w;
     // 标牌点击事件
-    rectSprite.pivot.set(size.w / 2, size.h / 2); // !important
+    rectSprite.pivot.set(labelSize.w / 2, labelSize.h / 2);
     rectSprite.position.set(0);
     rectSprite.name = "trackBgPlate";
     rectSprite.alpha = trackConfig.labelAlpha;
-    rectSprite.scale.set(-1, 1);
+    rectSprite.scale.set(1, 1);
     protoHandle(this, rectSprite);
     this.someEvents();
     return rectSprite;

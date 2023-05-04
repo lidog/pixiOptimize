@@ -1,5 +1,5 @@
-import { Graphics, SCALE_MODES, Sprite, Ticker } from "pixi.js";
-import { protoHandle, BaseTrackClass, getApparentStatus } from "./trackUtils";
+import { Graphics, SCALE_MODES, Sprite } from "pixi.js";
+import { protoHandle, BaseTrackClass, getApparentStatus, trackConfig } from "./trackUtils";
 import { DashLine } from "pixi-dashed-line";
 
 // 实例化目标园
@@ -27,6 +27,7 @@ export default class TrackCircle extends BaseTrackClass {
     const circleSprite = new Sprite(circleTexture);
     circleSprite.position.set(0, 0);
     circleSprite.anchor.set(0.5);
+    circleSprite.scale.set(0.3/trackConfig.scale/4); // 缩放
     circleSprite.cursor = "pointer";
     circleSprite.interactive = true;
     protoHandle(this, circleSprite);

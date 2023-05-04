@@ -38,7 +38,6 @@ export default class Track extends BaseTrackClass {
         container.name = `track_${trackData.TrackNumber}`;
         container.trackType = 'track';
         container.position.set(trackData.xPoint, trackData.yPoint);
-        container.angle = -180;
         return container;
     }
     update(newTrackData) {
@@ -49,7 +48,7 @@ export default class Track extends BaseTrackClass {
         this.setPosition(xPoint, yPoint);
     }
     updateAngle() {
-        this.dom.angle = -180;
+        // this.dom.angle = -180;
     }
     // 销毁实例；
     destroy() {

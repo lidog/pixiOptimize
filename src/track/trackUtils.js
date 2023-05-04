@@ -91,12 +91,14 @@ export const getAllLabelText = (trackData) => {
   const isHaveRouteText = trackData.relatedFlag === 2 ? "*" : "";
   const { label } = APPARENT_STATUS[trackData.arrDep] || APPARENT_STATUS[1];
   const labelSize = label.size;
+  const centerX = -labelSize.w / 2;
+  const centerY = -labelSize.h / 2;
   const textConfig = {
     callSign: {
       visible: true,
       value: isHavePlanText + trackData.callSign + isHaveRouteText,
-      x: -labelSize.w / 2 + 2,
-      y: -labelSize.h / 2,
+      x: centerX + 2,
+      y: centerY,
     },
     isControllStr: {
       visible: false,
@@ -107,14 +109,14 @@ export const getAllLabelText = (trackData) => {
         fill: 0xffffbf,
         fontWeight: "bold",
       },
-      x: -labelSize.w / 2 + trackData.callSign.length + 90,
-      y: -labelSize.h / 2,
+      x: centerX + trackData.callSign.length + 90,
+      y: centerY,
     },
     flyType: {
       visible: true,
       value: trackData.flyType,
       x: -labelSize.w / 4 + trackData.callSign.length + 50,
-      y: -labelSize.h / 2,
+      y: centerY,
     },
     runway: {
       visible: true,
@@ -125,13 +127,13 @@ export const getAllLabelText = (trackData) => {
     aircraftType: {
       visible: true,
       value: trackData.aircraftType + "/",
-      x: -labelSize.w / 2 + 3,
+      x: centerX + 3,
       y: -labelSize.h / 5,
     },
     wakeType: {
       visible: true,
       value: trackData.wakeType,
-      x: -labelSize.w / 2 + trackData.aircraftType.length + 33,
+      x: centerX + trackData.aircraftType.length + 33,
       y: -labelSize.h / 5,
     },
     DestAirport: {
@@ -149,25 +151,25 @@ export const getAllLabelText = (trackData) => {
     SID: {
       visible: true,
       value: trackData.SID,
-      x: -labelSize.w / 2 + 3,
+      x: centerX + 3,
       y: labelSize.h / 30,
     },
     StripState: {
       visible: true,
       value: trackData.StripState,
-      x: labelSize.w / 2 - 30,
+      x: centerX - 30,
       y: labelSize.h / 30,
     },
     freeText: {
       visible: true,
       value: "FREETEXT",
-      x: -labelSize.w / 2 + 3,
+      x: centerX + 3,
       y: labelSize.h / 4,
     },
     isForeignPilots: {
       visible: true,
       value: trackData.isForeignPilots ? "E" : "",
-      x: labelSize.w / 2 - 13,
+      x: (centerX * -1) - 13,
       y: labelSize.h / 4,
     },
   };
@@ -180,12 +182,14 @@ export const getSimpleLabelText = (trackData) => {
   const isHaveRouteText = trackData.relatedFlag === 2 ? "*" : "";
   const { label } = APPARENT_STATUS[trackData.arrDep] || APPARENT_STATUS[1];
   const labelSize = label.size;
+  const centerX = -labelSize.w / 2;
+  const centerY = -labelSize.h / 2;
   const textConfig = {
     callSign: {
       visible: true,
       value: isHavePlanText + trackData.callSign + isHaveRouteText,
-      x: -labelSize.w / 2 + 2,
-      y: -labelSize.h / 2 - 2,
+      x: centerX + 2,
+      y: centerY - 2,
     },
     isControllStr: {
       visible: trackData.isControll,
@@ -196,19 +200,19 @@ export const getSimpleLabelText = (trackData) => {
         fill: 0xffffbf,
         fontWeight: "bold",
       },
-      x: -labelSize.w / 2 + trackData.callSign.length + 75,
-      y: -labelSize.h / 2 - 2,
+      x: centerX + trackData.callSign.length + 75,
+      y: centerY - 2,
     },
     runway: {
       visible: true,
       value: trackData.runway,
-      x: labelSize.w / 2 - 27,
-      y: -labelSize.h / 2,
+      x: -1*centerX - 27,
+      y: centerY,
     },
     flyType: {
       visible: true,
       value: trackData.flyType,
-      x: -labelSize.w / 2 + 2,
+      x: centerX + 2,
       y: -labelSize.h / 7,
     },
     wakeType: {
@@ -220,7 +224,7 @@ export const getSimpleLabelText = (trackData) => {
     StripState: {
       visible: true,
       value: trackData.StripState,
-      x: labelSize.w / 2 - 30,
+      x: -1*centerX - 30,
       y: -labelSize.h / 7,
     },
     // isForeignPilots: {

@@ -15,5 +15,4 @@ export default function renderTrack(trackData, viewport = {}) {
         renderedTrackMap[TrackNumber].update(trackData);
         return renderedTrackMap[TrackNumber];
     }
-    
 }

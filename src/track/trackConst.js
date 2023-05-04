@@ -9,8 +9,8 @@ export const APPARENT_STATUS = {
         text: { color: 0xffffff },
       },
       size: {
-        w: 160,
-        h: 75,
+        w: 133,
+        h: 50,
         r: 0,
       },
     },
@@ -45,8 +45,8 @@ export const APPARENT_STATUS = {
         text: { color: 0xffffff },
       },
       size: {
-        w: 160,
-        h: 75,
+        w: 133,
+        h: 50,
         r: 0,
       },
     },
@@ -81,8 +81,8 @@ export const APPARENT_STATUS = {
         text: { color: 0xb2e6ff },
       },
       size: {
-        w: 160,
-        h: 75,
+        w: 133,
+        h: 50,
         r: 0,
       },
     },
